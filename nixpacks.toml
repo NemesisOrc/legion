@@ -1,0 +1,8 @@
+[phases.install]
+cmds = ["pnpm i --no-frozen-lockfile"]
+
+[phases.build]
+cmds = ["cd artifacts/new-world && pnpm build && cd ../api-server && pnpm build"]
+
+[start]
+cmd = "cd artifacts/api-server && SERVE_STATIC_PATH=../new-world/dist/public PORT=$PORT node --enable-source-maps ./dist/index.mjs"
