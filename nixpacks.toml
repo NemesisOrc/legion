@@ -2,10 +2,10 @@
 nixPkgs = ["nodejs_20"]
 
 [phases.install]
-cmds = ["npm install -g pnpm@10 && pnpm i --no-frozen-lockfile"]
+cmds = ["npm install -g pnpm@10 && export PATH=$PATH:$(npm root -g)/.bin && pnpm i --no-frozen-lockfile"]
 
 [phases.build]
-cmds = ["cd artifacts/new-world && pnpm build && cd ../api-server && pnpm build"]
+cmds = ["export PATH=$PATH:/root/.npm-global/bin && cd artifacts/new-world && pnpm build && cd ../api-server && pnpm build"]
 
 [start]
-cmd = "cd artifacts/api-server && SERVE_STATIC_PATH=../new-world/dist/public PORT=$PORT node --enable-source-maps ./dist/index.mjs"
+cmd = "cd artifacts/api-server && SERVE_STATIC_PATH=../new-world/dist/public PORT=${PORT:-8080} node --enable-source-maps ./dist/index.mjs"
