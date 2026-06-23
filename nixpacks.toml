@@ -1,5 +1,8 @@
+[phases.setup]
+nixPkgs = ["nodejs_20"]
+
 [phases.install]
-cmds = ["pnpm i --no-frozen-lockfile"]
+cmds = ["npm install -g pnpm@10 && pnpm i --no-frozen-lockfile"]
 
 [phases.build]
 cmds = ["cd artifacts/new-world && pnpm build && cd ../api-server && pnpm build"]
