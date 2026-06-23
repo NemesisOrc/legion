@@ -61,7 +61,7 @@ const staticPath = process.env["SERVE_STATIC_PATH"];
 if (staticPath && existsSync(staticPath)) {
   const absPath = path.resolve(staticPath);
   app.use(express.static(absPath));
-  app.get("*", (_req: Request, res: Response) => {
+  app.get("/{*path}", (_req: Request, res: Response) => {
     res.sendFile(path.join(absPath, "index.html"));
   });
 }
